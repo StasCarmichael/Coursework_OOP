@@ -8,10 +8,10 @@ namespace BLL.Interface
 {
     public interface IRailwayCarriage
     {
-        int NumberOfSeatsInLength { get; set; }
-        int NumberOfSeatsInWidth { get; set; }
+        int NumberOfSeatsInLength { get; }
+        int NumberOfSeatsInWidth { get; }
 
-        List<ISeat> Seats { get; set; }
-        ISeat this[int numWidht, int numLength] { get; set; }
+        List<ISeat> Seats { get; }
+        ISeat this[int numWidht, int numLength] { get; }
     }
 }

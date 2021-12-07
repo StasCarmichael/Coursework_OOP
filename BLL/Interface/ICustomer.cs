@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace BLL.Interface
+﻿namespace BLL.Interface
 {
     public interface ICustomer
     {

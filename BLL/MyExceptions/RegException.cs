@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLL.MyException
+namespace BLL.MyExceptions
 {
     public class RegException : Exception
     {
