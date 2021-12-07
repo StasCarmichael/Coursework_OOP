@@ -11,5 +11,6 @@ namespace BLL.RegEx
       
 
         public static readonly Regex NumberOfPassport = new Regex("[0-9]{9}");
+        public static readonly Regex NumberOfRoute = new Regex("[A-Z]{2}[0-9]{4}");
     }
 }

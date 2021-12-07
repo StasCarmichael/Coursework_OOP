@@ -42,6 +42,20 @@ namespace BLL.LogicClass
         public int NumberOfSeatsInWidth { get; private set; }
 
 
+        public bool IsAllFree()
+        {
+            foreach (var item in Seats)
+            {
+                if(item.IsReserve == true)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
         public List<ISeat> Seats
         {
             get
@@ -59,8 +73,6 @@ namespace BLL.LogicClass
                 return listSeats;
             }
         }
-
-
         public ISeat this[int numLength, int numWidht]
         {
             get

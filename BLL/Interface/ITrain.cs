@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BLL.Interface
 {
@@ -11,6 +7,7 @@ namespace BLL.Interface
         uint TrainNumber { get; set; }
         int MaxCarriages { get; }
 
+        bool IsAllFree();
 
         bool RemoveCarriage(IRailwayCarriage carriage);
         bool AddCarriage(IRailwayCarriage carriage);

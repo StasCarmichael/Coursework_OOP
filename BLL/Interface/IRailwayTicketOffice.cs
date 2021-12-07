@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BLL.Interface
 {
-    public  interface IRailwayTicketOffice
+    public interface IRailwayTicketOffice
     {
-        int MaxTrains { get; set; }
-        List<ITrain> Trains { get; set; }
+        int CounteOfRoutes { get; }
+
+        bool AddRailRoute(IRailRoute railRoute);
+        bool RemoveRailRoute(IRailRoute railRoute);
+
+
+        List<IRailRoute> RailRoutes { get; }
     }
 }

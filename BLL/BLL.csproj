@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IRailRoute.cs" />
     <Compile Include="Interface\IRailwayCarriage.cs" />
     <Compile Include="Interface\ICustomer.cs" />
     <Compile Include="Interface\IRailwayTicketOffice.cs" />
@@ -49,7 +50,9 @@
     <Compile Include="LogicClass\BaseRailwayCarriage.cs" />
     <Compile Include="LogicClass\BaseSeat.cs" />
     <Compile Include="LogicClass\Customer.cs" />
-    <Compile Include="LogicClass\Train.cs" />
+    <Compile Include="LogicClass\BaseTrain.cs" />
+    <Compile Include="LogicClass\RailRoute.cs" />
+    <Compile Include="LogicClass\RailwayTicketOffice.cs" />
     <Compile Include="MyExceptions\RegException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegEx\RegExpressions.cs" />
