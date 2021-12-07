@@ -11,6 +11,7 @@ using DAL;
 using DataService;
 using BLL.LogicClass;
 using BLL.Interface;
+using BLL.RegEx;
 using PL.ServiceForm;
 
 
@@ -19,28 +20,40 @@ namespace PL
     public partial class MainForm : Form
     {
         private Form ViewForm;
+        IRailwayTicketOffice railwayTicketOffice;
 
         public MainForm()
         {
             InitializeComponent();
 
-            AddDataInGrid(GetOffice());
+            
+            railwayTicketOffice = GetOffice();
+
+
+            BindingData();
+
+            AddDataInGrid();
         }
 
 
-        private void AddDataInGrid(IRailwayTicketOffice railwayTicketOffice)
+        private void BindingData()
         {
-           dataGridViewRailRoute.DataSource = railwayTicketOffice.RailRoutes;
+            dataGridViewRailRoute.DataSource = railRouteBindingSource;
+        }
 
-            int index = 0;
+        private void AddDataInGrid()
+        {
+            railRouteBindingSource.Clear();
+
             foreach (var item in railwayTicketOffice.RailRoutes)
             {
-                ColumnRoute.ValueType = typeof(System.String);
+                railRouteBindingSource.Add(item);
+            }
 
-                dataGridViewRailRoute.Rows[index].Cells[3].Value = item.Train.Carriages.Count.ToString();
-                index++;
-            }                       
+            dataGridViewRailRoute.Update();
+            Update();
         }
+
 
 
 
@@ -73,7 +86,17 @@ namespace PL
 
 
             railwayTicketOffice.AddRailRoute(railRoute);
-            railRoute.NumberOfRoute = "AM3433";
+
+            railRoute = new RailRoute()
+            {
+                NumberOfRoute = "AM3433",    
+                From = "Stambul",
+                To = "London",
+
+            };
+            railRoute.Train.AddCarriage(new BaseRailwayCarriage());
+            railRoute.Train.AddCarriage(new BaseRailwayCarriage());
+            
             railwayTicketOffice.AddRailRoute(railRoute);
 
 
@@ -82,14 +105,45 @@ namespace PL
 
         private void buttonView_Click(object sender, EventArgs e)
         {
-            //   MessageBox.Show(dataGridViewRailRoute.CurrentCell.ColumnIndex.ToString());
-
             var railRoute = dataGridViewRailRoute.Rows[dataGridViewRailRoute.CurrentCell.RowIndex].DataBoundItem as IRailRoute;
-            MessageBox.Show(railRoute.NumberOfRoute);
-
-
+          
             ViewForm = new RailRouteForm(railRoute);
             ViewForm.Show();
+        }
+
+        private void buttonAddRoute_Click(object sender, EventArgs e)
+        {
+            if (RegExpressions.NumberOfRoute.IsMatch(textBoxNumberOfRoute.Text))
+            {
+                if (textBoxTo.Text.Length > 0 && textBoxFrom.Text.Length > 0)
+                {
+                    try
+                    {
+                        IRailRoute railRoute = new RailRoute()
+                        {
+                            NumberOfRoute = textBoxNumberOfRoute.Text,
+                            From = textBoxFrom.Text,
+                            To = textBoxTo.Text
+                        };
+                        railwayTicketOffice.AddRailRoute(railRoute);
+
+                        AddDataInGrid();
+
+                        return;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Перевірте коректність вводу даних.");
+                    }
+                }
+            }
+
+            MessageBox.Show("Перевірте коректність вводу даних.");
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

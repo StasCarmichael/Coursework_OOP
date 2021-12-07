@@ -30,6 +30,7 @@ namespace BLL.LogicClass
         {
             NumberOfSeatsInLength = 10;
             NumberOfSeatsInWidth = 4;
+            NumberOfSeats = NumberOfSeatsInLength * NumberOfSeatsInWidth;
 
 
             seats = new ISeat[NumberOfSeatsInLength, NumberOfSeatsInWidth];
@@ -40,19 +41,34 @@ namespace BLL.LogicClass
 
         public int NumberOfSeatsInLength { get; private set; }
         public int NumberOfSeatsInWidth { get; private set; }
+        public int NumberOfSeats { get; set; }
 
 
         public bool IsAllFree()
         {
             foreach (var item in Seats)
             {
-                if(item.IsReserve == true)
+                if (item.IsReserve == true)
                 {
                     return false;
                 }
             }
 
             return true;
+        }
+        public int HowMuchReserved()
+        {
+            int counter = 0;
+
+            foreach (var item in Seats)
+            {
+                if (item.IsReserve == true)
+                {
+                    counter++;
+                }
+            }
+
+            return counter;
         }
 
 

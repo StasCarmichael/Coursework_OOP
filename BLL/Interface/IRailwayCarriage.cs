@@ -6,12 +6,14 @@ namespace BLL.Interface
     {
         int NumberOfSeatsInLength { get; }
         int NumberOfSeatsInWidth { get; }
+        int NumberOfSeats { get; }
 
 
         bool IsAllFree();
+        int HowMuchReserved();
 
 
         List<ISeat> Seats { get; }
-        ISeat this[int numWidht, int numLength] { get; }
+        ISeat this[int numLength, int numWidht] { get; }
     }
 }

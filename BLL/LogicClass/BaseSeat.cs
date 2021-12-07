@@ -1,16 +1,22 @@
 ﻿using BLL.Interface;
+using System;
 
 namespace BLL.LogicClass
 {
     public class BaseSeat : ISeat
     {
-        private ICustomer Customer;
+        #region Data
+
+        private ICustomer customer;
+        private string whenReserved;
+
+        #endregion
 
 
         //ctor
         public BaseSeat()
         {
-            Customer = null;
+            customer = null;
             IsReserve = false;
             Price = 200;
         }
@@ -20,7 +26,10 @@ namespace BLL.LogicClass
         public double Price { get; private set; }
 
 
-        public ICustomer WhoReserved() { return Customer; }
+        public ICustomer WhoReserved() { return customer; }
+
+
+        public string WhenReserved() { return whenReserved; }
         public bool Reserve(ICustomer customer)
         {
             if (IsReserve)
@@ -29,9 +38,28 @@ namespace BLL.LogicClass
             }
             else
             {
-                Customer = customer;
+                this.customer = customer;
+                whenReserved = DateTime.Now.Date.ToString();
+                IsReserve = true;
                 return true;
             }
         }
+        public bool UnReserve()
+        {
+            if (!IsReserve)
+            {
+                return false;
+            }
+            else
+            {
+                customer = null;
+                whenReserved = String.Empty;
+                IsReserve = false;
+                return true;
+            }
+        }
+
+
+
     }
 }
