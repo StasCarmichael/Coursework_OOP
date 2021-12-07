@@ -1,6 +1,6 @@
 ﻿using BLL.Interface;
 
-namespace BLL.LogisClass
+namespace BLL.LogicClass
 {
     public class BaseSeat : ISeat
     {

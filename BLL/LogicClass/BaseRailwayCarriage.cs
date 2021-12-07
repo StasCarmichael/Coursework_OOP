@@ -3,7 +3,7 @@
 using BLL.Interface;
 
 
-namespace BLL.LogisClass
+namespace BLL.LogicClass
 {
     public class BaseRailwayCarriage : IRailwayCarriage
     {

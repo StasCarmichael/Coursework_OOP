@@ -3,7 +3,7 @@ using BLL.MyExceptions;
 using BLL.RegEx;
 
 
-namespace BLL.LogisClass
+namespace BLL.LogicClass
 {
     public class Customer : ICustomer
     {

@@ -8,7 +8,13 @@ namespace BLL.Interface
 {
     public interface ITrain
     {
-        int MaxCarriages { get; set; }
-        List<IRailwayCarriage> Carriages { get; set; }
+        uint TrainNumber { get; set; }
+        int MaxCarriages { get; }
+
+
+        bool RemoveCarriage(IRailwayCarriage carriage);
+        bool AddCarriage(IRailwayCarriage carriage);
+
+        List<IRailwayCarriage> Carriages { get; }
     }
 }

@@ -46,9 +46,10 @@
     <Compile Include="Interface\IRailwayTicketOffice.cs" />
     <Compile Include="Interface\ISeat.cs" />
     <Compile Include="Interface\ITrain.cs" />
-    <Compile Include="LogisClass\BaseRailwayCarriage.cs" />
-    <Compile Include="LogisClass\BaseSeat.cs" />
-    <Compile Include="LogisClass\Customer.cs" />
+    <Compile Include="LogicClass\BaseRailwayCarriage.cs" />
+    <Compile Include="LogicClass\BaseSeat.cs" />
+    <Compile Include="LogicClass\Customer.cs" />
+    <Compile Include="LogicClass\Train.cs" />
     <Compile Include="MyExceptions\RegException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegEx\RegExpressions.cs" />
