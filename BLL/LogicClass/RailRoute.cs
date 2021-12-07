@@ -5,7 +5,7 @@ using BLL.MyExceptions;
 
 namespace BLL.LogicClass
 {
-    class RailRoute : IRailRoute
+    public class RailRoute : IRailRoute
     {
         private string numberOfRoute;
 
@@ -16,8 +16,6 @@ namespace BLL.LogicClass
 
         #region Propertics
 
-        public string From { get; set; }
-        public string To { get; set; }
         public string NumberOfRoute
         {
             get
@@ -33,6 +31,9 @@ namespace BLL.LogicClass
                 else { throw new RegException("Prop NumberOfRoute Error"); }
             }
         }
+        public string From { get; set; }
+        public string To { get; set; }
+
 
         #endregion
 
