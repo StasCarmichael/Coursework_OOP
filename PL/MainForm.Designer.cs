@@ -30,9 +30,9 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonView = new System.Windows.Forms.Button();
             this.dataGridViewRailRoute = new System.Windows.Forms.DataGridView();
             this.textBoxNumberOfRoute = new System.Windows.Forms.TextBox();
@@ -50,12 +50,12 @@ namespace PL
             this.labelTo = new System.Windows.Forms.Label();
             this.labelTrainSerialNumber = new System.Windows.Forms.Label();
             this.labelNUM = new System.Windows.Forms.Label();
+            this.labelNumCarrige = new System.Windows.Forms.Label();
+            this.labelCountSeats = new System.Windows.Forms.Label();
             this.numberOfRouteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.railRouteBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.labelNumCarrige = new System.Windows.Forms.Label();
-            this.labelCountSeats = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRailRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railRouteBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -80,38 +80,38 @@ namespace PL
             this.dataGridViewRailRoute.AllowUserToResizeRows = false;
             this.dataGridViewRailRoute.AutoGenerateColumns = false;
             this.dataGridViewRailRoute.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Century", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRailRoute.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRailRoute.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewRailRoute.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewRailRoute.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.numberOfRouteDataGridViewTextBoxColumn,
             this.fromDataGridViewTextBoxColumn,
             this.toDataGridViewTextBoxColumn});
             this.dataGridViewRailRoute.DataSource = this.railRouteBindingSource;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewRailRoute.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewRailRoute.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewRailRoute.Location = new System.Drawing.Point(12, 267);
             this.dataGridViewRailRoute.Name = "dataGridViewRailRoute";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewRailRoute.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Century", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewRailRoute.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewRailRoute.Size = new System.Drawing.Size(595, 264);
             this.dataGridViewRailRoute.TabIndex = 3;
             this.dataGridViewRailRoute.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRailRoute_CellClick);
@@ -268,6 +268,26 @@ namespace PL
             this.labelNUM.TabIndex = 18;
             this.labelNUM.Text = "Серійной номер потяга";
             // 
+            // labelNumCarrige
+            // 
+            this.labelNumCarrige.AutoSize = true;
+            this.labelNumCarrige.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelNumCarrige.Location = new System.Drawing.Point(624, 342);
+            this.labelNumCarrige.Name = "labelNumCarrige";
+            this.labelNumCarrige.Size = new System.Drawing.Size(227, 20);
+            this.labelNumCarrige.TabIndex = 19;
+            this.labelNumCarrige.Text = "Кількіть вагонів на маршуті";
+            // 
+            // labelCountSeats
+            // 
+            this.labelCountSeats.AutoSize = true;
+            this.labelCountSeats.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelCountSeats.Location = new System.Drawing.Point(624, 409);
+            this.labelCountSeats.Name = "labelCountSeats";
+            this.labelCountSeats.Size = new System.Drawing.Size(195, 20);
+            this.labelCountSeats.TabIndex = 20;
+            this.labelCountSeats.Text = "Кількіть зайнятих місць";
+            // 
             // numberOfRouteDataGridViewTextBoxColumn
             // 
             this.numberOfRouteDataGridViewTextBoxColumn.DataPropertyName = "NumberOfRoute";
@@ -291,31 +311,11 @@ namespace PL
             // 
             this.railRouteBindingSource.DataSource = typeof(BLL.LogicClass.RailRoute);
             // 
-            // labelNumCarrige
-            // 
-            this.labelNumCarrige.AutoSize = true;
-            this.labelNumCarrige.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelNumCarrige.Location = new System.Drawing.Point(624, 342);
-            this.labelNumCarrige.Name = "labelNumCarrige";
-            this.labelNumCarrige.Size = new System.Drawing.Size(227, 20);
-            this.labelNumCarrige.TabIndex = 19;
-            this.labelNumCarrige.Text = "Кількіть вагонів на маршуті";
-            // 
-            // labelCountSeats
-            // 
-            this.labelCountSeats.AutoSize = true;
-            this.labelCountSeats.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelCountSeats.Location = new System.Drawing.Point(624, 409);
-            this.labelCountSeats.Name = "labelCountSeats";
-            this.labelCountSeats.Size = new System.Drawing.Size(195, 20);
-            this.labelCountSeats.TabIndex = 20;
-            this.labelCountSeats.Text = "Кількіть зайнятих місць";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(864, 541);
             this.Controls.Add(this.labelCountSeats);
             this.Controls.Add(this.labelNumCarrige);
@@ -336,9 +336,12 @@ namespace PL
             this.Controls.Add(this.textBoxNumberOfRoute);
             this.Controls.Add(this.dataGridViewRailRoute);
             this.Controls.Add(this.buttonView);
+            this.MaximumSize = new System.Drawing.Size(880, 580);
+            this.MinimumSize = new System.Drawing.Size(880, 580);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "Railway Ticket Office";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRailRoute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.railRouteBindingSource)).EndInit();
             this.ResumeLayout(false);

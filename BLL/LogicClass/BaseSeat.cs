@@ -26,7 +26,12 @@ namespace BLL.LogicClass
         {
             IsReserve = baseSeat.IsReserve;
             Price = baseSeat.Price;
-            customer = new Customer(baseSeat.customer as Customer);
+
+            if (baseSeat.customer != null)
+            {
+                customer = new Customer(baseSeat.customer as Customer);
+            }
+
             whenReserved = baseSeat.whenReserved;
         }
 
