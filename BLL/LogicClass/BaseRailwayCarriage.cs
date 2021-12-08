@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using BLL.Interface;
 
 
 namespace BLL.LogicClass
 {
+    [Serializable]
     public class BaseRailwayCarriage : IRailwayCarriage
     {
 

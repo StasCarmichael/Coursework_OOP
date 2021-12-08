@@ -1,8 +1,10 @@
-﻿using BLL.Interface;
-using System;
+﻿using System;
+using BLL.Interface;
+
 
 namespace BLL.LogicClass
 {
+    [Serializable]
     public class BaseSeat : ISeat
     {
         #region Data

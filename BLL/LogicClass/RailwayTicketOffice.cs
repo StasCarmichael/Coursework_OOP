@@ -5,6 +5,7 @@ using BLL.Interface;
 
 namespace BLL.LogicClass
 {
+    [Serializable]
     public class RailwayTicketOffice : IRailwayTicketOffice
     {
         private List<IRailRoute> railRoutes;

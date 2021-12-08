@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using DAL.Interface;
 using DAL.Provider;
 using DataService;
 using DataService.Interface;
@@ -20,31 +21,39 @@ namespace PL
 {
     public partial class MainForm : Form
     {
-
+        private readonly string DB_path;
         private Form ViewForm;
-        private IRailwayTicketOffice railwayTicketOffice;
+        private RailwayTicketOffice railwayTicketOffice;
         private IDataService<RailwayTicketOffice> dataService;
+        private IDataProvider<RailwayTicketOffice> dataProvider;
 
 
-
-        public MainForm()
+        public MainForm(string DB_path)
         {
+            this.DB_path = DB_path;
+
+
             InitializeComponent();
 
+
             railwayTicketOffice = new RailwayTicketOffice();
-            railwayTicketOffice = GetOffice();
 
 
-            BindingDataSource();
+            //railwayTicketOffice = GetOffice();
+
+            SetDataProviderAndDataService();
+
+            //dataService.AddNewData(railwayTicketOffice);
+
+            railwayTicketOffice = dataService.GetData();
+
+
 
             UpdataDataInGridView();
         }
 
 
-        private void BindingDataSource()
-        {
-            dataGridViewRailRoute.DataSource = railRouteBindingSource;
-        }
+
         private void UpdataDataInGridView()
         {
             railRouteBindingSource.Clear();
@@ -57,11 +66,16 @@ namespace PL
             dataGridViewRailRoute.Update();
             Update();
         }
+        private void SetDataProviderAndDataService()
+        {
+            dataProvider = new BinaryProvider<RailwayTicketOffice>(DB_path);
+
+            dataService = new EntityService<RailwayTicketOffice>(dataProvider);
+        }
 
 
 
-
-        private IRailwayTicketOffice GetOffice()
+        private RailwayTicketOffice GetOffice()
         {
             IRailRoute railRoute = new RailRoute()
             {
@@ -76,7 +90,7 @@ namespace PL
 
 
 
-            IRailwayTicketOffice railwayTicketOffice = new RailwayTicketOffice();
+            RailwayTicketOffice railwayTicketOffice = new RailwayTicketOffice();
             railwayTicketOffice.AddRailRoute(railRoute);
 
             railRoute = new RailRoute()
@@ -117,18 +131,23 @@ namespace PL
 
         private void buttonView_Click(object sender, EventArgs e)
         {
-            var railRoute = dataGridViewRailRoute.CurrentRow.DataBoundItem as IRailRoute;
+            var railRoute = dataGridViewRailRoute?.CurrentRow?.DataBoundItem as IRailRoute;
 
+            if (railRoute == null) { MessageBox.Show("Немає запланованих рейсів."); return; }
+
+            int index = 0;
             foreach (var item in railwayTicketOffice.RailRoutes)
             {
                 if (item.Equals(railRoute))
                 {
-                    MessageBox.Show("good");
+                    MessageBox.Show(index.ToString());
                 }
+
+                index++;
             }
 
-            ViewForm = new RailRouteForm(railRoute);
-            ViewForm.Show();
+            //ViewForm = new RailRouteForm(railRoute);
+            //ViewForm.Show();
         }
 
 
@@ -210,7 +229,7 @@ namespace PL
 
 
 
-        #region GetDataAboutRoute
+        #region SetDataAboutRoute
 
         private void SetDataInTextBox(IRailRoute railRoute)
         {
@@ -219,27 +238,57 @@ namespace PL
             textBoxCountOfReserveSeats.Text = railRoute.Train.HowMuchReserved().ToString() + "/" + railRoute.Train.NumberOfSeats.ToString() + " OR "
                 + (double)(((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)) + "%";
         }
-        private void dataGridViewRailRoute_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void WriteInfoAboutCurrentRoute()
         {
             try
             {
                 var route = dataGridViewRailRoute.CurrentRow.DataBoundItem as IRailRoute;
 
                 if (route != null)
-                {
                     SetDataInTextBox(route);
-                }
+
             }
             catch (Exception)
             {
 
             }
-
+        }
+        private void dataGridViewRailRoute_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            WriteInfoAboutCurrentRoute();
         }
 
         #endregion
 
 
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            var railRoute = dataGridViewRailRoute?.CurrentRow?.DataBoundItem as IRailRoute;
+
+
+            if (railRoute == null) { MessageBox.Show("Немає запланованих рейсів."); return; }
+
+
+            if (!railRoute.Train.IsAllFree())
+            {
+                MessageBox.Show("Рейс видалити неможливо оскількі є зарезервовані місця");
+                return;
+            }
+
+            if (railwayTicketOffice.RemoveRailRoute(railRoute))
+            {
+                UpdataDataInGridView();
+                WriteInfoAboutCurrentRoute();
+
+                MessageBox.Show("Рейс успішно видалений");
+            }
+            else { MessageBox.Show("Під час видалення сталася помилка!!!"); }
+        }
+
+
+
         private void buttonExit_Click(object sender, EventArgs e) { Application.Exit(); }
+
     }
 }

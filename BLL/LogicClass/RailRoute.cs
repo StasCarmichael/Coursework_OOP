@@ -1,10 +1,13 @@
-﻿using BLL.Interface;
+﻿using System;
+
+using BLL.Interface;
 using BLL.RegEx;
 using BLL.MyExceptions;
 
 
 namespace BLL.LogicClass
 {
+    [Serializable]
     public class RailRoute : IRailRoute
     {
         private string numberOfRoute;

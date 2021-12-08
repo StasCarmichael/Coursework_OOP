@@ -70,10 +70,14 @@ namespace PL.ServiceForm
                 tempY += sizeY + gapsY;
             }
         }
-        private void UpdateSeat(object obj, EventArgs e)
+        private void UpdateSeatsAndRestrictCountOfCarrige(object obj, EventArgs e)
         {
             try
             {
+                if (bindingSourceCarriges.List.Count >= railRoute.Train.MaxCarriages) { bindingNavigatorAddNewItem.Enabled = false; }
+                else { bindingNavigatorAddNewItem.Enabled = true; }
+
+
                 var carriage = bindingSourceCarriges.Current as IRailwayCarriage;
 
 
@@ -105,17 +109,19 @@ namespace PL.ServiceForm
         }
         private void SubscribeUpdatesSeat()
         {
-            bindingNavigatorPositionItem.TextChanged += UpdateSeat;
+            bindingNavigatorPositionItem.TextChanged += UpdateSeatsAndRestrictCountOfCarrige;
 
-            bindingNavigatorMoveLastItem.Click += UpdateSeat;
-            bindingNavigatorMoveFirstItem.Click += UpdateSeat;
+            bindingNavigatorMoveLastItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
+            bindingNavigatorMoveFirstItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
 
-            bindingNavigatorMovePreviousItem.Click += UpdateSeat;
-            bindingNavigatorMoveNextItem.Click += UpdateSeat;
+            bindingNavigatorMovePreviousItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
+            bindingNavigatorMoveNextItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
 
-            bindingNavigatorDeleteItem.Click += UpdateSeat;
-            bindingNavigatorAddNewItem.Click += UpdateSeat;
+            bindingNavigatorDeleteItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
+            bindingNavigatorAddNewItem.Click += UpdateSeatsAndRestrictCountOfCarrige;
         }
+
+
         private void AddDataInBingingSourse()
         {
             foreach (var item in railRoute.Train.Carriages)
@@ -123,6 +129,39 @@ namespace PL.ServiceForm
                 bindingSourceCarriges.Add(item);
             }
         }
+        private void GetDataInMainForm()
+        {
+            var allCarrigesObj = bindingSourceCarriges.List;
+
+
+            List<IRailwayCarriage> railwayCarriages = new List<IRailwayCarriage>();
+            foreach (var item in allCarrigesObj)
+            {
+                railwayCarriages.Add(item as IRailwayCarriage);
+            }
+
+
+
+            //нужен допил
+            foreach (var item in railwayCarriages)
+            {
+                foreach (var carriageOnRoute in railRoute.Train.Carriages)
+                {
+                    if (carriageOnRoute.Equals(item))
+                    {
+
+                    }
+                    else
+                    {
+                        railRoute.Train.RemoveCarriage(carriageOnRoute);
+                    }
+                }
+            }
+
+
+            var carriges = railRoute.Train.Carriages;
+        }
+
 
         #endregion
 
@@ -148,7 +187,7 @@ namespace PL.ServiceForm
 
             AddDataInBingingSourse();
 
-            UpdateSeat(this, new EventArgs());
+            UpdateSeatsAndRestrictCountOfCarrige(this, new EventArgs());
         }
 
 

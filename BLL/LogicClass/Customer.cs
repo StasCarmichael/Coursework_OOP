@@ -1,10 +1,13 @@
-﻿using BLL.Interface;
+﻿using System;
+
+using BLL.Interface;
 using BLL.MyExceptions;
 using BLL.RegEx;
 
 
 namespace BLL.LogicClass
 {
+    [Serializable]
     public class Customer : ICustomer
     {
         #region Data
