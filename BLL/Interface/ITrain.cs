@@ -4,10 +4,14 @@ namespace BLL.Interface
 {
     public interface ITrain
     {
-        uint TrainNumber { get; set; }
+        uint SerialTrainNumber { get; set; }
         int MaxCarriages { get; }
+        int NumberOfSeats { get; }
+
 
         bool IsAllFree();
+        int HowMuchReserved();
+
 
         bool RemoveCarriage(IRailwayCarriage carriage);
         bool AddCarriage(IRailwayCarriage carriage);

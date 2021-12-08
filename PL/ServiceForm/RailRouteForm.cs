@@ -24,7 +24,7 @@ namespace PL.ServiceForm
         int numLenght = 10;
         int numWieght = 4;
         int startX = 50;
-        int startY = 50;
+        int startY = 65;
         int sizeX = 40;
         int sizeY = 40;
         int gapsX = 5;
@@ -152,7 +152,30 @@ namespace PL.ServiceForm
         }
 
 
+        private void buttonBackToMain_Click(object sender, EventArgs e)
+        {
+
+        }
 
 
+
+        #region Move Form
+
+        Point lastPoint;
+        private void RailRouteForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Left += e.X - lastPoint.X;
+                this.Top += e.Y - lastPoint.Y;
+            }
+        }
+        private void RailRouteForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            lastPoint = new Point(e.X, e.Y);
+        }
+
+
+        #endregion
     }
 }

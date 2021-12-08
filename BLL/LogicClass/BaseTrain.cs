@@ -12,7 +12,7 @@ namespace BLL.LogicClass
 
         public BaseTrain()
         {
-            TrainNumber = 0;
+            SerialTrainNumber = 0;
             MaxCarriages = 10;
 
             carriages = new List<IRailwayCarriage>();
@@ -21,8 +21,23 @@ namespace BLL.LogicClass
 
         #region Propertis
 
-        public uint TrainNumber { get; set; }
+        public uint SerialTrainNumber { get; set; }
         public int MaxCarriages { get; private set; }
+        public int NumberOfSeats
+        {
+            get
+            {
+                int counter = 0;
+
+                foreach (var item in Carriages)
+                {
+                    counter += item.NumberOfSeats;
+                }
+
+                return counter;
+            }
+        }
+
 
         public List<IRailwayCarriage> Carriages
         {
@@ -47,6 +62,17 @@ namespace BLL.LogicClass
             }
 
             return true;
+        }
+        public int HowMuchReserved()
+        {
+            int counter = 0;
+
+            foreach (var item in Carriages)
+            {
+                counter += item.HowMuchReserved();
+            }
+
+            return counter;
         }
 
 

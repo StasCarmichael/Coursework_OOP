@@ -7,6 +7,9 @@
         string NumberOfRoute { get; set; }
 
 
+        int HowMuchReserved();
+
+
         ITrain Train { get; }
     }
 }

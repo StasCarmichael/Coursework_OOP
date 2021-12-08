@@ -33,6 +33,7 @@ namespace PL.ServiceForm
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RailRouteForm));
             this.bindingNavigatorCarriages = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -43,7 +44,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonBackToMain = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorCarriages)).BeginInit();
             this.bindingNavigatorCarriages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCarriges)).BeginInit();
@@ -68,14 +69,14 @@ namespace PL.ServiceForm
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigatorCarriages.Location = new System.Drawing.Point(0, 536);
+            this.bindingNavigatorCarriages.Location = new System.Drawing.Point(0, 535);
             this.bindingNavigatorCarriages.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigatorCarriages.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigatorCarriages.MoveNextItem = this.bindingNavigatorMoveNextItem;
             this.bindingNavigatorCarriages.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigatorCarriages.Name = "bindingNavigatorCarriages";
             this.bindingNavigatorCarriages.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigatorCarriages.Size = new System.Drawing.Size(684, 25);
+            this.bindingNavigatorCarriages.Size = new System.Drawing.Size(680, 25);
             this.bindingNavigatorCarriages.TabIndex = 1;
             this.bindingNavigatorCarriages.Text = "bindingNavigator1";
             // 
@@ -87,6 +88,10 @@ namespace PL.ServiceForm
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
+            // 
+            // bindingSourceCarriges
+            // 
+            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
             // 
             // bindingNavigatorCountItem
             // 
@@ -131,6 +136,7 @@ namespace PL.ServiceForm
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Положение";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.ReadOnly = true;
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
@@ -165,20 +171,32 @@ namespace PL.ServiceForm
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // bindingSourceCarriges
+            // buttonBackToMain
             // 
-            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
+            this.buttonBackToMain.BackColor = System.Drawing.Color.DarkOrange;
+            this.buttonBackToMain.Font = new System.Drawing.Font("Century", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonBackToMain.Location = new System.Drawing.Point(119, 12);
+            this.buttonBackToMain.Name = "buttonBackToMain";
+            this.buttonBackToMain.Size = new System.Drawing.Size(446, 41);
+            this.buttonBackToMain.TabIndex = 10;
+            this.buttonBackToMain.Text = "Повернутися на головну форму";
+            this.buttonBackToMain.UseVisualStyleBackColor = false;
+            this.buttonBackToMain.Click += new System.EventHandler(this.buttonBackToMain_Click);
             // 
             // RailRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 561);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(680, 560);
+            this.Controls.Add(this.buttonBackToMain);
             this.Controls.Add(this.bindingNavigatorCarriages);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RailRouteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RailRouteForm";
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RailRouteForm_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.RailRouteForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorCarriages)).EndInit();
             this.bindingNavigatorCarriages.ResumeLayout(false);
             this.bindingNavigatorCarriages.PerformLayout();
@@ -202,5 +220,6 @@ namespace PL.ServiceForm
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
         private System.Windows.Forms.BindingSource bindingSourceCarriges;
+        private System.Windows.Forms.Button buttonBackToMain;
     }
 }

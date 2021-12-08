@@ -37,6 +37,11 @@ namespace BLL.LogicClass
 
         #endregion
 
+        public int HowMuchReserved()
+        {
+            return Train.HowMuchReserved();
+        }
+
 
         public ITrain Train { get; private set; }
     }
