@@ -39,6 +39,23 @@ namespace BLL.LogicClass
 
             SetNewFreeBaseSeat();
         }
+        public BaseRailwayCarriage(BaseRailwayCarriage railwayCarriage)
+        {
+            NumberOfSeatsInLength = railwayCarriage.NumberOfSeatsInLength;
+            NumberOfSeatsInWidth = railwayCarriage.NumberOfSeatsInWidth; ;
+            NumberOfSeats = NumberOfSeatsInLength * NumberOfSeatsInWidth;
+
+
+            seats = new ISeat[NumberOfSeatsInLength, NumberOfSeatsInWidth];
+
+            for (int i = 0; i < seats.GetLength(0); i++)
+            {
+                for (int j = 0; j < seats.GetLength(1); j++)
+                {
+                    seats[i, j] = new BaseSeat(railwayCarriage[i,j] as BaseSeat);
+                }
+            }
+        }
 
 
         public int NumberOfSeatsInLength { get; private set; }

@@ -33,7 +33,6 @@ namespace PL.ServiceForm
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RailRouteForm));
             this.bindingNavigatorCarriages = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
@@ -45,6 +44,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.buttonBackToMain = new System.Windows.Forms.Button();
+            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorCarriages)).BeginInit();
             this.bindingNavigatorCarriages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCarriges)).BeginInit();
@@ -55,7 +55,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorCarriages.AddNewItem = this.bindingNavigatorAddNewItem;
             this.bindingNavigatorCarriages.BindingSource = this.bindingSourceCarriges;
             this.bindingNavigatorCarriages.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigatorCarriages.DeleteItem = this.bindingNavigatorDeleteItem;
+            this.bindingNavigatorCarriages.DeleteItem = null;
             this.bindingNavigatorCarriages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.bindingNavigatorCarriages.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bindingNavigatorMoveFirstItem,
@@ -89,10 +89,6 @@ namespace PL.ServiceForm
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
             // 
-            // bindingSourceCarriges
-            // 
-            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
-            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
@@ -108,6 +104,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorDeleteItem.Text = "Удалить";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -182,6 +179,10 @@ namespace PL.ServiceForm
             this.buttonBackToMain.Text = "Повернутися на головну форму";
             this.buttonBackToMain.UseVisualStyleBackColor = false;
             this.buttonBackToMain.Click += new System.EventHandler(this.buttonBackToMain_Click);
+            // 
+            // bindingSourceCarriges
+            // 
+            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
             // 
             // RailRouteForm
             // 

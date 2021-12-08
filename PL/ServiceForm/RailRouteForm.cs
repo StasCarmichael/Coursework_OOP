@@ -33,18 +33,36 @@ namespace PL.ServiceForm
         #endregion
 
 
+        private MainForm mainForm;
         private Button[,] buttons;
         private IRailRoute railRoute;
+
+
+        //ctor
+        public RailRouteForm(MainForm _mainForm, IRailRoute _railRoute)
+        {
+            InitializeComponent();
+
+            mainForm = _mainForm;
+            railRoute = _railRoute;
+
+
+            CreateSeatsButton();
+            SubscribeUpdatesSeat();
+
+
+            AddDataInBingingNavigation();
+
+            UpdateSeatsAndRestrictCountOfCarrige(this, new EventArgs());
+        }
+
 
 
 
         #region ServiceMethod
 
-        private void CreateButton()
+        private void CreateSeatsButton()
         {
-
-
-
             int tempX = startX;
             int tempY = startY;
 
@@ -60,6 +78,7 @@ namespace PL.ServiceForm
                     buttons[i, j].Size = new Size(sizeX, sizeY);
                     buttons[i, j].BackColor = BaseColor;
 
+                    buttons[i, j].Click += ButtonSeatsHeandler;
 
                     this.Controls.Add(buttons[i, j]);
 
@@ -70,6 +89,25 @@ namespace PL.ServiceForm
                 tempY += sizeY + gapsY;
             }
         }
+        private void ButtonSeatsHeandler(object sender, EventArgs e)
+        {
+            var currButton = sender as Button;
+
+            for (int i = 0; i < buttons.GetLength(0); i++)
+            {
+                for (int j = 0; j < buttons.GetLength(1); j++)
+                {
+
+                   if( buttons[i, j].Location == currButton.Location)
+                    {
+                        MessageBox.Show(i.ToString() + " " + j.ToString()); ;
+                    }
+
+                }
+            }
+        }
+
+
         private void UpdateSeatsAndRestrictCountOfCarrige(object obj, EventArgs e)
         {
             try
@@ -83,15 +121,15 @@ namespace PL.ServiceForm
 
                 if (bindingSourceCarriges.List.Count == 0)
                 {
-                    for (int i = 0; i < numLenght; i++)
-                        for (int j = 0; j < numWieght; j++)
+                    for (int i = 0; i < buttons.GetLength(0); i++)
+                        for (int j = 0; j < buttons.GetLength(1); j++)
                             buttons[i, j].BackColor = BaseColor;
                 }
                 else
                 {
-                    for (int i = 0; i < numLenght; i++)
+                    for (int i = 0; i < buttons.GetLength(0); i++)
                     {
-                        for (int j = 0; j < numWieght; j++)
+                        for (int j = 0; j < buttons.GetLength(1); j++)
                         {
                             if (carriage[i, j].IsReserve)
                                 buttons[i, j].BackColor = LockColor;
@@ -122,11 +160,24 @@ namespace PL.ServiceForm
         }
 
 
-        private void AddDataInBingingSourse()
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+            if ((bindingSourceCarriges.Current as IRailwayCarriage)?.IsAllFree() == true)
+            {
+                bindingSourceCarriges.RemoveCurrent();
+            }
+            else
+            {
+                MessageBox.Show("Неможливо видалити вагон бо є зарезервовані місця.");
+            }
+        }
+
+
+        private void AddDataInBingingNavigation()
         {
             foreach (var item in railRoute.Train.Carriages)
             {
-                bindingSourceCarriges.Add(item);
+                bindingSourceCarriges.Add(new BaseRailwayCarriage(item as BaseRailwayCarriage));
             }
         }
         private void GetDataInMainForm()
@@ -136,30 +187,23 @@ namespace PL.ServiceForm
 
             List<IRailwayCarriage> railwayCarriages = new List<IRailwayCarriage>();
             foreach (var item in allCarrigesObj)
-            {
                 railwayCarriages.Add(item as IRailwayCarriage);
-            }
 
 
 
-            //нужен допил
+            //Unreserve all carriges
+            foreach (var carriageOnRoute in railRoute.Train.Carriages)
+                foreach (var item in carriageOnRoute.Seats)
+                    item.UnReserve();
+
+
+            railRoute.Train.Carriages.Clear();
+
+
+            //add new carriges
             foreach (var item in railwayCarriages)
-            {
-                foreach (var carriageOnRoute in railRoute.Train.Carriages)
-                {
-                    if (carriageOnRoute.Equals(item))
-                    {
+                railRoute.Train.AddCarriage(item);
 
-                    }
-                    else
-                    {
-                        railRoute.Train.RemoveCarriage(carriageOnRoute);
-                    }
-                }
-            }
-
-
-            var carriges = railRoute.Train.Carriages;
         }
 
 
@@ -167,33 +211,15 @@ namespace PL.ServiceForm
 
 
 
-        //ctor
-        public RailRouteForm(IRailRoute _railRoute)
-        {
-            InitializeComponent();
-
-
-            this.railRoute = _railRoute;
-            railRoute = new RailRoute() { };
-            railRoute.Train.AddCarriage(new BaseRailwayCarriage());
-            railRoute.Train.Carriages[0][0, 0].Reserve(new Customer());
-            railRoute.Train.Carriages[0][2, 3].Reserve(new Customer());
-            railRoute.Train.Carriages[0][6, 2].Reserve(new Customer());
-
-
-            CreateButton();
-
-            SubscribeUpdatesSeat();
-
-            AddDataInBingingSourse();
-
-            UpdateSeatsAndRestrictCountOfCarrige(this, new EventArgs());
-        }
-
 
         private void buttonBackToMain_Click(object sender, EventArgs e)
         {
+            GetDataInMainForm();
 
+            mainForm.Show();
+            mainForm.WriteInfoAboutCurrentRoute();
+
+            this.Close();
         }
 
 
@@ -214,7 +240,8 @@ namespace PL.ServiceForm
             lastPoint = new Point(e.X, e.Y);
         }
 
-
         #endregion
+
+
     }
 }

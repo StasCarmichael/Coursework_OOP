@@ -20,15 +20,24 @@ namespace BLL.LogicClass
         #endregion
 
 
-        //ctor
-        public Customer()
-        { }
+        //ctors
+        public Customer() { }
         public Customer(string name, string surname, int age, string numberOfPassport)
         {
             Name = name;
             Surname = surname;
             Age = age;
             NumberOfPassport = numberOfPassport;
+        }
+        public Customer(Customer customer)
+        {
+            if (customer != null)
+            {
+                name = customer.name;
+                surname = customer.surname;
+                age = customer.age;
+                numberOfPassport = customer.numberOfPassport;
+            }
         }
 
 

@@ -15,12 +15,19 @@ namespace BLL.LogicClass
         #endregion
 
 
-        //ctor
+        //ctors
         public BaseSeat()
         {
             customer = null;
             IsReserve = false;
             Price = 200;
+        }
+        public BaseSeat(BaseSeat baseSeat)
+        {
+            IsReserve = baseSeat.IsReserve;
+            Price = baseSeat.Price;
+            customer = new Customer(baseSeat.customer as Customer);
+            whenReserved = baseSeat.whenReserved;
         }
 
 

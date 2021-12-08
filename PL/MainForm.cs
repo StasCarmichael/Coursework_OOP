@@ -39,13 +39,13 @@ namespace PL
             railwayTicketOffice = new RailwayTicketOffice();
 
 
-            //railwayTicketOffice = GetOffice();
+            railwayTicketOffice = GetOffice();
 
             SetDataProviderAndDataService();
 
             //dataService.AddNewData(railwayTicketOffice);
 
-            railwayTicketOffice = dataService.GetData();
+            //railwayTicketOffice = dataService.GetData();
 
 
 
@@ -102,9 +102,9 @@ namespace PL
             };
             railRoute.Train.SerialTrainNumber = 100;
             railRoute.Train.AddCarriage(new BaseRailwayCarriage());
-            railRoute.Train.Carriages[0][0, 0].Reserve(new Customer());
-            railRoute.Train.Carriages[0][2, 3].Reserve(new Customer());
-            railRoute.Train.Carriages[0][6, 2].Reserve(new Customer());
+            railRoute.Train.Carriages[0][0, 0].Reserve(new Customer() { Name = "Igor" , Surname = "Valilew" , Age = 15 , NumberOfPassport = "034174936"});
+            railRoute.Train.Carriages[0][2, 3].Reserve(new Customer() { Name = "Igor", Surname = "Valilew", Age = 15, NumberOfPassport = "034174936" });
+            railRoute.Train.Carriages[0][6, 2].Reserve(new Customer() { Name = "Igor", Surname = "Valilew", Age = 15, NumberOfPassport = "034174936" });
 
 
             railwayTicketOffice.AddRailRoute(railRoute);
@@ -134,20 +134,10 @@ namespace PL
             var railRoute = dataGridViewRailRoute?.CurrentRow?.DataBoundItem as IRailRoute;
 
             if (railRoute == null) { MessageBox.Show("Немає запланованих рейсів."); return; }
-
-            int index = 0;
-            foreach (var item in railwayTicketOffice.RailRoutes)
-            {
-                if (item.Equals(railRoute))
-                {
-                    MessageBox.Show(index.ToString());
-                }
-
-                index++;
-            }
-
-            //ViewForm = new RailRouteForm(railRoute);
-            //ViewForm.Show();
+                       
+            ViewForm = new RailRouteForm(this, railRoute);
+            this.Hide();
+            ViewForm.Show();
         }
 
 
@@ -238,7 +228,7 @@ namespace PL
             textBoxCountOfReserveSeats.Text = railRoute.Train.HowMuchReserved().ToString() + "/" + railRoute.Train.NumberOfSeats.ToString() + " OR "
                 + (double)(((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)) + "%";
         }
-        private void WriteInfoAboutCurrentRoute()
+        public void WriteInfoAboutCurrentRoute()
         {
             try
             {
