@@ -19,7 +19,9 @@ namespace PL
 
         private readonly string DB_path;
         private Form ViewForm;
+
         private RailwayTicketOffice railwayTicketOffice;
+
         private IDataService<RailwayTicketOffice> dataService;
         private IDataProvider<RailwayTicketOffice> dataProvider;
 
@@ -36,19 +38,17 @@ namespace PL
 
             railwayTicketOffice = new RailwayTicketOffice();
 
-            //railwayTicketOffice = GetOffice();
-
             railwayTicketOffice = dataService.GetData();
 
 
-            UpdataDataInGridView();
+            SetDataInGridView();
         }
 
 
 
         #region ServiceMethod
 
-        private void UpdataDataInGridView()
+        private void SetDataInGridView()
         {
             railRouteBindingSource.Clear();
 
@@ -109,7 +109,7 @@ namespace PL
 
                             var dataList = railRouteBindingSource.List;
                             foreach (var item in dataList)
-                                if ((item as RailRoute)?.NumberOfRoute == textBoxNumberOfRoute.Text)
+                                if ((item as IRailRoute)?.NumberOfRoute == textBoxNumberOfRoute.Text)
                                     granted = false;
 
 
@@ -129,7 +129,7 @@ namespace PL
 
                                 ClearAddInfo();
 
-                                UpdataDataInGridView();
+                                SetDataInGridView();
                                 return;
                             }
                             else
@@ -171,7 +171,7 @@ namespace PL
 
             if (railwayTicketOffice.RemoveRailRoute(railRoute))
             {
-                UpdataDataInGridView();
+                SetDataInGridView();
                 WriteInfoAboutCurrentRoute();
 
                 MessageBox.Show("Рейс успішно видалений");
@@ -190,7 +190,7 @@ namespace PL
             textBoxTrainId.Text = railRoute.Train.SerialTrainNumber.ToString();
             textBoxCountOfCarrige.Text = railRoute.Train.Carriages.Count.ToString() + "/" + railRoute.Train.MaxCarriages.ToString();
             textBoxCountOfReserveSeats.Text = railRoute.Train.HowMuchReserved().ToString() + "/" + railRoute.Train.NumberOfSeats.ToString() + " OR "
-                + (double)(((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)) + "%";
+                + (((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)).ToString().Substring(0, 6) + "%";
         }
         public void WriteInfoAboutCurrentRoute()
         {
@@ -215,13 +215,17 @@ namespace PL
         #endregion
 
 
+
+        #region Exit
+
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //save data
             dataService.AddNewData(railwayTicketOffice);
         }
-
-
         private void buttonExit_Click(object sender, EventArgs e) { Application.Exit(); }
+
+        #endregion
 
     }
 }

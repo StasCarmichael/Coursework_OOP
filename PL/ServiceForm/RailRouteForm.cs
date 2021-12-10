@@ -20,7 +20,7 @@ namespace PL.ServiceForm
         int numLenght = 10;
         int numWieght = 4;
         int startX = 50;
-        int startY = 65;
+        int startY = 105;
         int sizeX = 40;
         int sizeY = 40;
         int gapsX = 5;
@@ -50,10 +50,11 @@ namespace PL.ServiceForm
             mainForm = _mainForm;
             railRoute = _railRoute;
 
+            labelRouteName.Text =  "Route number : " + railRoute.NumberOfRoute;
 
             //содная кнопок + подписки
             CreateSeatsButton();
-            SubscribeUpdatesSeats();
+            SubscribeNavigatorFunstional();
 
             //Добавления даних к привязке
             AddDataInBingingNavigation();
@@ -69,8 +70,7 @@ namespace PL.ServiceForm
 
         #region ServiceMethod
 
-
-
+        
         #region ButtonSeatsFunstion
 
         private void CreateSeatsButton()
@@ -126,7 +126,7 @@ namespace PL.ServiceForm
 
 
 
-        #region CustomInfo
+        #region CustomerInfo
 
         private void SetCustomerInfo()
         {
@@ -187,7 +187,7 @@ namespace PL.ServiceForm
 
 
 
-        #region MenageButton
+        #region CustomerInfoMenageButton
 
         private void buttonReserve_Click(object sender, EventArgs e)
         {
@@ -353,18 +353,31 @@ namespace PL.ServiceForm
         {
             UpdataSeatsAndRestrictCounter();
         }
-        private void SubscribeUpdatesSeats()
+        private void ClearCustomerInfo(object obj, EventArgs e)
         {
-            bindingNavigatorPositionItem.TextChanged += UpdateSeatsAndRestrictCountHendler;
-
+            ClearCustomInfo();
+            DisEnableAllMenageButton();
+        }
+        private void SubscribeNavigatorFunstional()
+        {
             bindingNavigatorMoveLastItem.Click += UpdateSeatsAndRestrictCountHendler;
             bindingNavigatorMoveFirstItem.Click += UpdateSeatsAndRestrictCountHendler;
+            bindingNavigatorMoveLastItem.Click += ClearCustomerInfo;
+            bindingNavigatorMoveFirstItem.Click += ClearCustomerInfo;
+
+
 
             bindingNavigatorMovePreviousItem.Click += UpdateSeatsAndRestrictCountHendler;
             bindingNavigatorMoveNextItem.Click += UpdateSeatsAndRestrictCountHendler;
+            bindingNavigatorMovePreviousItem.Click += ClearCustomerInfo;
+            bindingNavigatorMoveNextItem.Click += ClearCustomerInfo;
+
+
 
             bindingNavigatorDeleteItem.Click += UpdateSeatsAndRestrictCountHendler;
             bindingNavigatorAddNewItem.Click += UpdateSeatsAndRestrictCountHendler;
+            bindingNavigatorDeleteItem.Click += ClearCustomerInfo;
+            bindingNavigatorAddNewItem.Click += ClearCustomerInfo;
         }
 
         #endregion
@@ -427,17 +440,18 @@ namespace PL.ServiceForm
         #endregion
 
 
+        #region Exit
 
-        private void buttonBackToMain_Click(object sender, EventArgs e)
+        private void buttonBackToMain_Click(object sender, EventArgs e) { this.Close(); }
+        private void RailRouteForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             GetDataInMainForm();
 
             mainForm.Show();
             mainForm.WriteInfoAboutCurrentRoute();
-
-            this.Close();
         }
 
+        #endregion
 
 
         #region Move Form

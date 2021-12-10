@@ -33,8 +33,8 @@ namespace PL.ServiceForm
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RailRouteForm));
             this.bindingNavigatorCarriages = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -43,6 +43,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.buttonBackToMain = new System.Windows.Forms.Button();
             this.labelPassportNumber = new System.Windows.Forms.Label();
             this.labelAge = new System.Windows.Forms.Label();
@@ -60,7 +61,7 @@ namespace PL.ServiceForm
             this.labelPrice = new System.Windows.Forms.Label();
             this.labelWhenReserve = new System.Windows.Forms.Label();
             this.labelWhen = new System.Windows.Forms.Label();
-            this.bindingSourceCarriges = new System.Windows.Forms.BindingSource(this.components);
+            this.labelRouteName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorCarriages)).BeginInit();
             this.bindingNavigatorCarriages.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCarriges)).BeginInit();
@@ -85,7 +86,7 @@ namespace PL.ServiceForm
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem});
-            this.bindingNavigatorCarriages.Location = new System.Drawing.Point(0, 535);
+            this.bindingNavigatorCarriages.Location = new System.Drawing.Point(0, 575);
             this.bindingNavigatorCarriages.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigatorCarriages.MoveLastItem = this.bindingNavigatorMoveLastItem;
             this.bindingNavigatorCarriages.MoveNextItem = this.bindingNavigatorMoveNextItem;
@@ -105,22 +106,16 @@ namespace PL.ServiceForm
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Добавить";
             // 
+            // bindingSourceCarriges
+            // 
+            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
+            // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
             this.bindingNavigatorCountItem.Size = new System.Drawing.Size(43, 22);
             this.bindingNavigatorCountItem.Text = "для {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Общее число элементов";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Удалить";
-            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -149,6 +144,7 @@ namespace PL.ServiceForm
             // 
             this.bindingNavigatorPositionItem.AccessibleName = "Положение";
             this.bindingNavigatorPositionItem.AutoSize = false;
+            this.bindingNavigatorPositionItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
             this.bindingNavigatorPositionItem.ReadOnly = true;
             this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
@@ -183,6 +179,16 @@ namespace PL.ServiceForm
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // bindingNavigatorDeleteItem
+            // 
+            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
+            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
+            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.bindingNavigatorDeleteItem.Text = "Удалить";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            // 
             // buttonBackToMain
             // 
             this.buttonBackToMain.BackColor = System.Drawing.Color.DarkOrange;
@@ -199,7 +205,7 @@ namespace PL.ServiceForm
             // 
             this.labelPassportNumber.AutoSize = true;
             this.labelPassportNumber.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPassportNumber.Location = new System.Drawing.Point(340, 326);
+            this.labelPassportNumber.Location = new System.Drawing.Point(340, 370);
             this.labelPassportNumber.Name = "labelPassportNumber";
             this.labelPassportNumber.Size = new System.Drawing.Size(138, 20);
             this.labelPassportNumber.TabIndex = 25;
@@ -209,7 +215,7 @@ namespace PL.ServiceForm
             // 
             this.labelAge.AutoSize = true;
             this.labelAge.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelAge.Location = new System.Drawing.Point(340, 266);
+            this.labelAge.Location = new System.Drawing.Point(340, 310);
             this.labelAge.Name = "labelAge";
             this.labelAge.Size = new System.Drawing.Size(38, 20);
             this.labelAge.TabIndex = 24;
@@ -219,7 +225,7 @@ namespace PL.ServiceForm
             // 
             this.labelSurname.AutoSize = true;
             this.labelSurname.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSurname.Location = new System.Drawing.Point(340, 206);
+            this.labelSurname.Location = new System.Drawing.Point(340, 250);
             this.labelSurname.Name = "labelSurname";
             this.labelSurname.Size = new System.Drawing.Size(77, 20);
             this.labelSurname.TabIndex = 23;
@@ -229,7 +235,7 @@ namespace PL.ServiceForm
             // 
             this.labelName.AutoSize = true;
             this.labelName.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelName.Location = new System.Drawing.Point(340, 152);
+            this.labelName.Location = new System.Drawing.Point(340, 196);
             this.labelName.Name = "labelName";
             this.labelName.Size = new System.Drawing.Size(53, 20);
             this.labelName.TabIndex = 22;
@@ -238,7 +244,7 @@ namespace PL.ServiceForm
             // textBoxPassportNumber
             // 
             this.textBoxPassportNumber.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPassportNumber.Location = new System.Drawing.Point(340, 349);
+            this.textBoxPassportNumber.Location = new System.Drawing.Point(340, 393);
             this.textBoxPassportNumber.MaxLength = 9;
             this.textBoxPassportNumber.Name = "textBoxPassportNumber";
             this.textBoxPassportNumber.Size = new System.Drawing.Size(248, 27);
@@ -247,7 +253,7 @@ namespace PL.ServiceForm
             // textAge
             // 
             this.textAge.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textAge.Location = new System.Drawing.Point(340, 289);
+            this.textAge.Location = new System.Drawing.Point(340, 333);
             this.textAge.MaxLength = 3;
             this.textAge.Name = "textAge";
             this.textAge.Size = new System.Drawing.Size(248, 27);
@@ -256,7 +262,7 @@ namespace PL.ServiceForm
             // textBoxSurname
             // 
             this.textBoxSurname.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxSurname.Location = new System.Drawing.Point(340, 229);
+            this.textBoxSurname.Location = new System.Drawing.Point(340, 273);
             this.textBoxSurname.MaxLength = 50;
             this.textBoxSurname.Name = "textBoxSurname";
             this.textBoxSurname.Size = new System.Drawing.Size(248, 27);
@@ -265,7 +271,7 @@ namespace PL.ServiceForm
             // textBoxName
             // 
             this.textBoxName.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxName.Location = new System.Drawing.Point(340, 175);
+            this.textBoxName.Location = new System.Drawing.Point(340, 219);
             this.textBoxName.MaxLength = 50;
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(248, 27);
@@ -275,7 +281,7 @@ namespace PL.ServiceForm
             // 
             this.buttonReserve.BackColor = System.Drawing.Color.Lime;
             this.buttonReserve.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonReserve.Location = new System.Drawing.Point(340, 393);
+            this.buttonReserve.Location = new System.Drawing.Point(340, 437);
             this.buttonReserve.Name = "buttonReserve";
             this.buttonReserve.Size = new System.Drawing.Size(120, 57);
             this.buttonReserve.TabIndex = 26;
@@ -287,7 +293,7 @@ namespace PL.ServiceForm
             // 
             this.buttonsSaveChange.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.buttonsSaveChange.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonsSaveChange.Location = new System.Drawing.Point(468, 393);
+            this.buttonsSaveChange.Location = new System.Drawing.Point(468, 437);
             this.buttonsSaveChange.Name = "buttonsSaveChange";
             this.buttonsSaveChange.Size = new System.Drawing.Size(120, 57);
             this.buttonsSaveChange.TabIndex = 27;
@@ -299,7 +305,7 @@ namespace PL.ServiceForm
             // 
             this.buttonUnreserve.BackColor = System.Drawing.Color.OrangeRed;
             this.buttonUnreserve.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonUnreserve.Location = new System.Drawing.Point(340, 456);
+            this.buttonUnreserve.Location = new System.Drawing.Point(340, 500);
             this.buttonUnreserve.Name = "buttonUnreserve";
             this.buttonUnreserve.Size = new System.Drawing.Size(248, 57);
             this.buttonUnreserve.TabIndex = 28;
@@ -311,7 +317,7 @@ namespace PL.ServiceForm
             // 
             this.labelSeat.AutoSize = true;
             this.labelSeat.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSeat.Location = new System.Drawing.Point(434, 56);
+            this.labelSeat.Location = new System.Drawing.Point(434, 100);
             this.labelSeat.Name = "labelSeat";
             this.labelSeat.Size = new System.Drawing.Size(54, 23);
             this.labelSeat.TabIndex = 29;
@@ -321,7 +327,7 @@ namespace PL.ServiceForm
             // 
             this.labelPriceInfo.AutoSize = true;
             this.labelPriceInfo.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPriceInfo.Location = new System.Drawing.Point(340, 80);
+            this.labelPriceInfo.Location = new System.Drawing.Point(340, 124);
             this.labelPriceInfo.Name = "labelPriceInfo";
             this.labelPriceInfo.Size = new System.Drawing.Size(65, 20);
             this.labelPriceInfo.TabIndex = 30;
@@ -331,7 +337,7 @@ namespace PL.ServiceForm
             // 
             this.labelPrice.AutoSize = true;
             this.labelPrice.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPrice.Location = new System.Drawing.Point(411, 80);
+            this.labelPrice.Location = new System.Drawing.Point(411, 124);
             this.labelPrice.Name = "labelPrice";
             this.labelPrice.Size = new System.Drawing.Size(0, 20);
             this.labelPrice.TabIndex = 31;
@@ -340,7 +346,7 @@ namespace PL.ServiceForm
             // 
             this.labelWhenReserve.AutoSize = true;
             this.labelWhenReserve.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelWhenReserve.Location = new System.Drawing.Point(478, 117);
+            this.labelWhenReserve.Location = new System.Drawing.Point(478, 161);
             this.labelWhenReserve.Name = "labelWhenReserve";
             this.labelWhenReserve.Size = new System.Drawing.Size(0, 20);
             this.labelWhenReserve.TabIndex = 33;
@@ -349,22 +355,28 @@ namespace PL.ServiceForm
             // 
             this.labelWhen.AutoSize = true;
             this.labelWhen.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelWhen.Location = new System.Drawing.Point(340, 117);
+            this.labelWhen.Location = new System.Drawing.Point(340, 161);
             this.labelWhen.Name = "labelWhen";
             this.labelWhen.Size = new System.Drawing.Size(134, 20);
             this.labelWhen.TabIndex = 32;
             this.labelWhen.Text = "When Reserve = ";
             // 
-            // bindingSourceCarriges
+            // labelRouteName
             // 
-            this.bindingSourceCarriges.DataSource = typeof(BLL.LogicClass.BaseRailwayCarriage);
+            this.labelRouteName.AutoSize = true;
+            this.labelRouteName.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelRouteName.Location = new System.Drawing.Point(180, 65);
+            this.labelRouteName.Name = "labelRouteName";
+            this.labelRouteName.Size = new System.Drawing.Size(0, 23);
+            this.labelRouteName.TabIndex = 34;
             // 
             // RailRouteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(600, 560);
+            this.ClientSize = new System.Drawing.Size(600, 600);
+            this.Controls.Add(this.labelRouteName);
             this.Controls.Add(this.labelWhenReserve);
             this.Controls.Add(this.labelWhen);
             this.Controls.Add(this.labelPrice);
@@ -384,9 +396,11 @@ namespace PL.ServiceForm
             this.Controls.Add(this.buttonBackToMain);
             this.Controls.Add(this.bindingNavigatorCarriages);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RailRouteForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rail Route Info";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RailRouteForm_FormClosing);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RailRouteForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.RailRouteForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigatorCarriages)).EndInit();
@@ -429,5 +443,6 @@ namespace PL.ServiceForm
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.Label labelWhenReserve;
         private System.Windows.Forms.Label labelWhen;
+        private System.Windows.Forms.Label labelRouteName;
     }
 }

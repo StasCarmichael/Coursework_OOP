@@ -33,8 +33,13 @@ namespace PL
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.buttonView = new System.Windows.Forms.Button();
             this.dataGridViewRailRoute = new System.Windows.Forms.DataGridView();
+            this.numberOfRouteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.railRouteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBoxNumberOfRoute = new System.Windows.Forms.TextBox();
             this.textBoxFrom = new System.Windows.Forms.TextBox();
             this.textBoxTo = new System.Windows.Forms.TextBox();
@@ -52,10 +57,9 @@ namespace PL
             this.labelNUM = new System.Windows.Forms.Label();
             this.labelNumCarrige = new System.Windows.Forms.Label();
             this.labelCountSeats = new System.Windows.Forms.Label();
-            this.numberOfRouteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.railRouteBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSerchRoute = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRailRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railRouteBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -64,9 +68,9 @@ namespace PL
             // 
             this.buttonView.BackColor = System.Drawing.Color.DodgerBlue;
             this.buttonView.Font = new System.Drawing.Font("Century", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonView.Location = new System.Drawing.Point(628, 172);
+            this.buttonView.Location = new System.Drawing.Point(479, 175);
             this.buttonView.Name = "buttonView";
-            this.buttonView.Size = new System.Drawing.Size(210, 70);
+            this.buttonView.Size = new System.Drawing.Size(359, 64);
             this.buttonView.TabIndex = 2;
             this.buttonView.Text = "View";
             this.buttonView.UseVisualStyleBackColor = false;
@@ -116,13 +120,36 @@ namespace PL
             this.dataGridViewRailRoute.TabIndex = 3;
             this.dataGridViewRailRoute.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewRailRoute_CellClick);
             // 
+            // numberOfRouteDataGridViewTextBoxColumn
+            // 
+            this.numberOfRouteDataGridViewTextBoxColumn.DataPropertyName = "NumberOfRoute";
+            this.numberOfRouteDataGridViewTextBoxColumn.HeaderText = "NumberOfRoute";
+            this.numberOfRouteDataGridViewTextBoxColumn.Name = "numberOfRouteDataGridViewTextBoxColumn";
+            this.numberOfRouteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fromDataGridViewTextBoxColumn
+            // 
+            this.fromDataGridViewTextBoxColumn.DataPropertyName = "From";
+            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
+            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            // 
+            // toDataGridViewTextBoxColumn
+            // 
+            this.toDataGridViewTextBoxColumn.DataPropertyName = "To";
+            this.toDataGridViewTextBoxColumn.HeaderText = "To";
+            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
+            // 
+            // railRouteBindingSource
+            // 
+            this.railRouteBindingSource.DataSource = typeof(BLL.LogicClass.RailRoute);
+            // 
             // textBoxNumberOfRoute
             // 
             this.textBoxNumberOfRoute.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxNumberOfRoute.Location = new System.Drawing.Point(12, 37);
             this.textBoxNumberOfRoute.MaxLength = 6;
             this.textBoxNumberOfRoute.Name = "textBoxNumberOfRoute";
-            this.textBoxNumberOfRoute.Size = new System.Drawing.Size(217, 27);
+            this.textBoxNumberOfRoute.Size = new System.Drawing.Size(200, 27);
             this.textBoxNumberOfRoute.TabIndex = 4;
             // 
             // textBoxFrom
@@ -131,7 +158,7 @@ namespace PL
             this.textBoxFrom.Location = new System.Drawing.Point(12, 91);
             this.textBoxFrom.MaxLength = 50;
             this.textBoxFrom.Name = "textBoxFrom";
-            this.textBoxFrom.Size = new System.Drawing.Size(217, 27);
+            this.textBoxFrom.Size = new System.Drawing.Size(200, 27);
             this.textBoxFrom.TabIndex = 5;
             // 
             // textBoxTo
@@ -140,16 +167,16 @@ namespace PL
             this.textBoxTo.Location = new System.Drawing.Point(12, 151);
             this.textBoxTo.MaxLength = 50;
             this.textBoxTo.Name = "textBoxTo";
-            this.textBoxTo.Size = new System.Drawing.Size(217, 27);
+            this.textBoxTo.Size = new System.Drawing.Size(200, 27);
             this.textBoxTo.TabIndex = 6;
             // 
             // buttonAddRoute
             // 
             this.buttonAddRoute.BackColor = System.Drawing.Color.Lime;
             this.buttonAddRoute.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddRoute.Location = new System.Drawing.Point(267, 48);
+            this.buttonAddRoute.Location = new System.Drawing.Point(233, 139);
             this.buttonAddRoute.Name = "buttonAddRoute";
-            this.buttonAddRoute.Size = new System.Drawing.Size(198, 70);
+            this.buttonAddRoute.Size = new System.Drawing.Size(222, 44);
             this.buttonAddRoute.TabIndex = 7;
             this.buttonAddRoute.Text = "Add new Route";
             this.buttonAddRoute.UseVisualStyleBackColor = false;
@@ -159,9 +186,9 @@ namespace PL
             // 
             this.buttonRemove.BackColor = System.Drawing.Color.Orange;
             this.buttonRemove.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonRemove.Location = new System.Drawing.Point(267, 161);
+            this.buttonRemove.Location = new System.Drawing.Point(233, 194);
             this.buttonRemove.Name = "buttonRemove";
-            this.buttonRemove.Size = new System.Drawing.Size(198, 70);
+            this.buttonRemove.Size = new System.Drawing.Size(222, 44);
             this.buttonRemove.TabIndex = 8;
             this.buttonRemove.Text = "Remove Route";
             this.buttonRemove.UseVisualStyleBackColor = false;
@@ -193,7 +220,7 @@ namespace PL
             // 
             this.textBoxCountOfReserveSeats.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxCountOfReserveSeats.Location = new System.Drawing.Point(628, 432);
-            this.textBoxCountOfReserveSeats.MaxLength = 50;
+            this.textBoxCountOfReserveSeats.MaxLength = 20;
             this.textBoxCountOfReserveSeats.Name = "textBoxCountOfReserveSeats";
             this.textBoxCountOfReserveSeats.ReadOnly = true;
             this.textBoxCountOfReserveSeats.Size = new System.Drawing.Size(210, 27);
@@ -215,7 +242,7 @@ namespace PL
             this.textBoxTrainNumber.Location = new System.Drawing.Point(12, 211);
             this.textBoxTrainNumber.MaxLength = 6;
             this.textBoxTrainNumber.Name = "textBoxTrainNumber";
-            this.textBoxTrainNumber.Size = new System.Drawing.Size(217, 27);
+            this.textBoxTrainNumber.Size = new System.Drawing.Size(200, 27);
             this.textBoxTrainNumber.TabIndex = 13;
             // 
             // labelNumRoute
@@ -288,28 +315,35 @@ namespace PL
             this.labelCountSeats.TabIndex = 20;
             this.labelCountSeats.Text = "Кількіть зайнятих місць";
             // 
-            // numberOfRouteDataGridViewTextBoxColumn
+            // label1
             // 
-            this.numberOfRouteDataGridViewTextBoxColumn.DataPropertyName = "NumberOfRoute";
-            this.numberOfRouteDataGridViewTextBoxColumn.HeaderText = "NumberOfRoute";
-            this.numberOfRouteDataGridViewTextBoxColumn.Name = "numberOfRouteDataGridViewTextBoxColumn";
-            this.numberOfRouteDataGridViewTextBoxColumn.ReadOnly = true;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(281, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(157, 20);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Enter route number";
             // 
-            // fromDataGridViewTextBoxColumn
+            // textBoxSerchRoute
             // 
-            this.fromDataGridViewTextBoxColumn.DataPropertyName = "From";
-            this.fromDataGridViewTextBoxColumn.HeaderText = "From";
-            this.fromDataGridViewTextBoxColumn.Name = "fromDataGridViewTextBoxColumn";
+            this.textBoxSerchRoute.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSerchRoute.Location = new System.Drawing.Point(272, 37);
+            this.textBoxSerchRoute.MaxLength = 6;
+            this.textBoxSerchRoute.Name = "textBoxSerchRoute";
+            this.textBoxSerchRoute.Size = new System.Drawing.Size(183, 27);
+            this.textBoxSerchRoute.TabIndex = 21;
             // 
-            // toDataGridViewTextBoxColumn
+            // button1
             // 
-            this.toDataGridViewTextBoxColumn.DataPropertyName = "To";
-            this.toDataGridViewTextBoxColumn.HeaderText = "To";
-            this.toDataGridViewTextBoxColumn.Name = "toDataGridViewTextBoxColumn";
-            // 
-            // railRouteBindingSource
-            // 
-            this.railRouteBindingSource.DataSource = typeof(BLL.LogicClass.RailRoute);
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.button1.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(272, 68);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(183, 44);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Search Route";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // MainForm
             // 
@@ -317,6 +351,9 @@ namespace PL
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(864, 541);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxSerchRoute);
             this.Controls.Add(this.labelCountSeats);
             this.Controls.Add(this.labelNumCarrige);
             this.Controls.Add(this.labelNUM);
@@ -336,6 +373,7 @@ namespace PL
             this.Controls.Add(this.textBoxNumberOfRoute);
             this.Controls.Add(this.dataGridViewRailRoute);
             this.Controls.Add(this.buttonView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(880, 580);
             this.MinimumSize = new System.Drawing.Size(880, 580);
             this.Name = "MainForm";
@@ -373,6 +411,9 @@ namespace PL
         private System.Windows.Forms.DataGridViewTextBoxColumn toDataGridViewTextBoxColumn;
         private System.Windows.Forms.Label labelNumCarrige;
         private System.Windows.Forms.Label labelCountSeats;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxSerchRoute;
+        private System.Windows.Forms.Button button1;
     }
 }
 
