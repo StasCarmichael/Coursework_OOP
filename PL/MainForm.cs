@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 using DAL.Interface;
@@ -189,8 +190,12 @@ namespace PL
         {
             textBoxTrainId.Text = railRoute.Train.SerialTrainNumber.ToString();
             textBoxCountOfCarrige.Text = railRoute.Train.Carriages.Count.ToString() + "/" + railRoute.Train.MaxCarriages.ToString();
+
+            string persentReserve = ((((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)) * 100).ToString();
+            if (persentReserve.Length > 4) { persentReserve = persentReserve.Substring(0, 4); }
+
             textBoxCountOfReserveSeats.Text = railRoute.Train.HowMuchReserved().ToString() + "/" + railRoute.Train.NumberOfSeats.ToString() + " OR "
-                + (((double)railRoute.Train.HowMuchReserved()) / (double)(railRoute.Train.NumberOfSeats)).ToString().Substring(0, 6) + "%";
+                + persentReserve + "%";
         }
         public void WriteInfoAboutCurrentRoute()
         {
@@ -216,6 +221,173 @@ namespace PL
 
 
 
+        #region SearchData
+
+        private void buttonSearchRoute_Click(object sender, EventArgs e)
+        {
+            if (RegExpressions.NumberOfRoute.IsMatch(textBoxSerchRoute.Text))
+            {
+                foreach (var item in railwayTicketOffice.RailRoutes)
+                {
+                    if (item.NumberOfRoute == textBoxSerchRoute.Text)
+                    {
+                        ViewForm = new RailRouteForm(this, item);
+                        this.Hide();
+                        ViewForm.Show();
+
+                        return;
+                    }
+                }
+
+                MessageBox.Show("Маршут з даним номером не знайдено");
+            }
+            else
+            {
+                MessageBox.Show("Ведіть коректні дані");
+            }
+        }
+        private void buttonSearchCustomer_Click(object sender, EventArgs e)
+        {
+            List<ICustomer> searchedCustomer = new List<ICustomer>();
+            string customerInfo = default;
+
+
+            #region data
+
+            bool _name = false;
+            bool _surname = false;
+            bool _age = false;
+            bool _passportNumber = false;
+
+            string name = default;
+            string surname = default;
+            int age = default;
+            string passportNumber = default;
+
+            #endregion
+
+
+            try
+            {
+                if (textBoxName.Text.Length > 0)
+                {
+                    if (!RegExpressions.Name.IsMatch(textBoxName.Text)) { throw new Exception(); }
+
+                    name = textBoxName.Text;
+                    _name = true;
+                }
+                if (textBoxSurname.Text.Length > 0)
+                {
+                    if (!RegExpressions.Surname.IsMatch(textBoxSurname.Text)) { throw new Exception(); }
+
+                    surname = textBoxSurname.Text;
+                    _surname = true;
+                }
+                if (textAge.Text.Length > 0)
+                {
+                    if (!RegExpressions.Age(int.Parse(textAge.Text))) { throw new Exception(); }
+
+                    age = int.Parse(textAge.Text);
+                    _age = true;
+                }
+                if (textBoxPassportNumber.Text.Length > 0)
+                {
+                    if (!RegExpressions.NumberOfPassport.IsMatch(textBoxPassportNumber.Text)) { throw new Exception(); }
+
+                    passportNumber = textBoxPassportNumber.Text;
+                    _passportNumber = true;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ведіть коректні дані.");
+                return;
+            }
+
+
+            if ((_name || _surname || _age || _passportNumber) == false)
+            {
+                MessageBox.Show("Задайте параметри для пошуку");
+                return;
+            }
+
+
+            foreach (var route in railwayTicketOffice.RailRoutes)
+            {
+                int carrigeNumber = 1;
+                foreach (var carriage in route.Train.Carriages)
+                {
+                    for (int rows = 0; rows < carriage.NumberOfSeatsInLength; rows++)
+                    {
+                        for (int seat = 0; seat < carriage.NumberOfSeatsInWidth; seat++)
+                        {
+                            ISeat currentSeat = carriage[rows, seat];
+
+
+                            bool granted = true;
+                            if (currentSeat.IsReserve)
+                            {
+                                ICustomer customer = currentSeat.WhoReserved();
+
+
+                                #region CheckData
+
+                                if (_name)
+                                {
+                                    if (!(customer.Name == name))
+                                        granted = false;
+                                }
+                                if (_surname)
+                                {
+                                    if (!(customer.Surname == surname))
+                                        granted = false;
+                                }
+                                if (_age)
+                                {
+                                    if (!(customer.Age == age))
+                                        granted = false;
+                                }
+                                if (_passportNumber)
+                                {
+                                    if (!(customer.NumberOfPassport == passportNumber))
+                                        granted = false;
+                                }
+
+                                #endregion
+
+
+                                if (granted)
+                                {
+                                    searchedCustomer.Add(customer);
+
+
+                                    customerInfo += $"Рейс з номером {route.NumberOfRoute}\n" +
+                                        $"Вагон з порядковим номером {carrigeNumber}\n" +
+                                        $"Сидіння з номером : ряд = {rows + 1} місце =  {seat + 1}\n\n\n";
+                                }
+                            }
+                        }
+                    }
+
+                    carrigeNumber++;
+                }
+            }
+
+            if (searchedCustomer.Count > 0)
+            {
+                MessageBox.Show(customerInfo);
+            }
+            else
+            {
+                MessageBox.Show("Клієнта з такими даними немає !!!");
+            }
+
+        }
+
+        #endregion
+
+
+
         #region Exit
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -225,7 +397,10 @@ namespace PL
         }
         private void buttonExit_Click(object sender, EventArgs e) { Application.Exit(); }
 
+
+
         #endregion
+
 
     }
 }

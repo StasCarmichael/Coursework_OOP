@@ -80,6 +80,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="PL_ClassDiagram.cd" />
     <None Include="Properties\DataSources\BLL.LogicClass.BaseRailwayCarriage.datasource" />
     <None Include="Properties\DataSources\BLL.LogicClass.BaseSeat.datasource" />
     <None Include="Properties\DataSources\BLL.LogicClass.BaseTrain.datasource" />

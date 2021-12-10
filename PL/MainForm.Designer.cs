@@ -59,7 +59,16 @@ namespace PL
             this.labelCountSeats = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxSerchRoute = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonSearchRoute = new System.Windows.Forms.Button();
+            this.labelPassportNumber = new System.Windows.Forms.Label();
+            this.labelAge = new System.Windows.Forms.Label();
+            this.labelSurname = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.textBoxPassportNumber = new System.Windows.Forms.TextBox();
+            this.textAge = new System.Windows.Forms.TextBox();
+            this.textBoxSurname = new System.Windows.Forms.TextBox();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.buttonSearchCustomer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRailRoute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.railRouteBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -68,9 +77,9 @@ namespace PL
             // 
             this.buttonView.BackColor = System.Drawing.Color.DodgerBlue;
             this.buttonView.Font = new System.Drawing.Font("Century", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonView.Location = new System.Drawing.Point(479, 175);
+            this.buttonView.Location = new System.Drawing.Point(483, 188);
             this.buttonView.Name = "buttonView";
-            this.buttonView.Size = new System.Drawing.Size(359, 64);
+            this.buttonView.Size = new System.Drawing.Size(379, 50);
             this.buttonView.TabIndex = 2;
             this.buttonView.Text = "View";
             this.buttonView.UseVisualStyleBackColor = false;
@@ -200,7 +209,7 @@ namespace PL
             this.buttonExit.Font = new System.Drawing.Font("Century", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonExit.Location = new System.Drawing.Point(628, 490);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(210, 41);
+            this.buttonExit.Size = new System.Drawing.Size(230, 41);
             this.buttonExit.TabIndex = 9;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = false;
@@ -213,7 +222,7 @@ namespace PL
             this.textBoxCountOfCarrige.MaxLength = 50;
             this.textBoxCountOfCarrige.Name = "textBoxCountOfCarrige";
             this.textBoxCountOfCarrige.ReadOnly = true;
-            this.textBoxCountOfCarrige.Size = new System.Drawing.Size(210, 27);
+            this.textBoxCountOfCarrige.Size = new System.Drawing.Size(230, 27);
             this.textBoxCountOfCarrige.TabIndex = 10;
             // 
             // textBoxCountOfReserveSeats
@@ -223,7 +232,7 @@ namespace PL
             this.textBoxCountOfReserveSeats.MaxLength = 20;
             this.textBoxCountOfReserveSeats.Name = "textBoxCountOfReserveSeats";
             this.textBoxCountOfReserveSeats.ReadOnly = true;
-            this.textBoxCountOfReserveSeats.Size = new System.Drawing.Size(210, 27);
+            this.textBoxCountOfReserveSeats.Size = new System.Drawing.Size(230, 27);
             this.textBoxCountOfReserveSeats.TabIndex = 11;
             // 
             // textBoxTrainId
@@ -233,7 +242,7 @@ namespace PL
             this.textBoxTrainId.MaxLength = 50;
             this.textBoxTrainId.Name = "textBoxTrainId";
             this.textBoxTrainId.ReadOnly = true;
-            this.textBoxTrainId.Size = new System.Drawing.Size(210, 27);
+            this.textBoxTrainId.Size = new System.Drawing.Size(230, 27);
             this.textBoxTrainId.TabIndex = 12;
             // 
             // textBoxTrainNumber
@@ -334,24 +343,122 @@ namespace PL
             this.textBoxSerchRoute.Size = new System.Drawing.Size(183, 27);
             this.textBoxSerchRoute.TabIndex = 21;
             // 
-            // button1
+            // buttonSearchRoute
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.button1.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(272, 68);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 44);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Search Route";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonSearchRoute.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.buttonSearchRoute.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSearchRoute.Location = new System.Drawing.Point(272, 68);
+            this.buttonSearchRoute.Name = "buttonSearchRoute";
+            this.buttonSearchRoute.Size = new System.Drawing.Size(183, 44);
+            this.buttonSearchRoute.TabIndex = 23;
+            this.buttonSearchRoute.Text = "Search Route";
+            this.buttonSearchRoute.UseVisualStyleBackColor = false;
+            this.buttonSearchRoute.Click += new System.EventHandler(this.buttonSearchRoute_Click);
+            // 
+            // labelPassportNumber
+            // 
+            this.labelPassportNumber.AutoSize = true;
+            this.labelPassportNumber.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelPassportNumber.Location = new System.Drawing.Point(713, 67);
+            this.labelPassportNumber.Name = "labelPassportNumber";
+            this.labelPassportNumber.Size = new System.Drawing.Size(138, 20);
+            this.labelPassportNumber.TabIndex = 33;
+            this.labelPassportNumber.Text = "Passport Number";
+            // 
+            // labelAge
+            // 
+            this.labelAge.AutoSize = true;
+            this.labelAge.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAge.Location = new System.Drawing.Point(717, 14);
+            this.labelAge.Name = "labelAge";
+            this.labelAge.Size = new System.Drawing.Size(38, 20);
+            this.labelAge.TabIndex = 32;
+            this.labelAge.Text = "Age";
+            // 
+            // labelSurname
+            // 
+            this.labelSurname.AutoSize = true;
+            this.labelSurname.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelSurname.Location = new System.Drawing.Point(479, 68);
+            this.labelSurname.Name = "labelSurname";
+            this.labelSurname.Size = new System.Drawing.Size(77, 20);
+            this.labelSurname.TabIndex = 31;
+            this.labelSurname.Text = "Surname";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelName.Location = new System.Drawing.Point(479, 14);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(53, 20);
+            this.labelName.TabIndex = 30;
+            this.labelName.Text = "Name";
+            // 
+            // textBoxPassportNumber
+            // 
+            this.textBoxPassportNumber.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPassportNumber.Location = new System.Drawing.Point(712, 91);
+            this.textBoxPassportNumber.MaxLength = 9;
+            this.textBoxPassportNumber.Name = "textBoxPassportNumber";
+            this.textBoxPassportNumber.Size = new System.Drawing.Size(150, 27);
+            this.textBoxPassportNumber.TabIndex = 29;
+            // 
+            // textAge
+            // 
+            this.textAge.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textAge.Location = new System.Drawing.Point(712, 37);
+            this.textAge.MaxLength = 3;
+            this.textAge.Name = "textAge";
+            this.textAge.Size = new System.Drawing.Size(150, 27);
+            this.textAge.TabIndex = 28;
+            // 
+            // textBoxSurname
+            // 
+            this.textBoxSurname.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSurname.Location = new System.Drawing.Point(479, 91);
+            this.textBoxSurname.MaxLength = 50;
+            this.textBoxSurname.Name = "textBoxSurname";
+            this.textBoxSurname.Size = new System.Drawing.Size(210, 27);
+            this.textBoxSurname.TabIndex = 27;
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Font = new System.Drawing.Font("Century", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxName.Location = new System.Drawing.Point(479, 37);
+            this.textBoxName.MaxLength = 50;
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(210, 27);
+            this.textBoxName.TabIndex = 26;
+            // 
+            // buttonSearchCustomer
+            // 
+            this.buttonSearchCustomer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.buttonSearchCustomer.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSearchCustomer.Location = new System.Drawing.Point(566, 124);
+            this.buttonSearchCustomer.Name = "buttonSearchCustomer";
+            this.buttonSearchCustomer.Size = new System.Drawing.Size(234, 44);
+            this.buttonSearchCustomer.TabIndex = 34;
+            this.buttonSearchCustomer.Text = "Search Customer";
+            this.buttonSearchCustomer.UseVisualStyleBackColor = false;
+            this.buttonSearchCustomer.Click += new System.EventHandler(this.buttonSearchCustomer_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(864, 541);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(874, 541);
+            this.Controls.Add(this.buttonSearchCustomer);
+            this.Controls.Add(this.labelPassportNumber);
+            this.Controls.Add(this.labelAge);
+            this.Controls.Add(this.labelSurname);
+            this.Controls.Add(this.labelName);
+            this.Controls.Add(this.textBoxPassportNumber);
+            this.Controls.Add(this.textAge);
+            this.Controls.Add(this.textBoxSurname);
+            this.Controls.Add(this.textBoxName);
+            this.Controls.Add(this.buttonSearchRoute);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxSerchRoute);
             this.Controls.Add(this.labelCountSeats);
@@ -374,8 +481,8 @@ namespace PL
             this.Controls.Add(this.dataGridViewRailRoute);
             this.Controls.Add(this.buttonView);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(880, 580);
-            this.MinimumSize = new System.Drawing.Size(880, 580);
+            this.MaximumSize = new System.Drawing.Size(890, 580);
+            this.MinimumSize = new System.Drawing.Size(890, 580);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Railway Ticket Office";
@@ -413,7 +520,16 @@ namespace PL
         private System.Windows.Forms.Label labelCountSeats;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxSerchRoute;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSearchRoute;
+        private System.Windows.Forms.Label labelPassportNumber;
+        private System.Windows.Forms.Label labelAge;
+        private System.Windows.Forms.Label labelSurname;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.TextBox textBoxPassportNumber;
+        private System.Windows.Forms.TextBox textAge;
+        private System.Windows.Forms.TextBox textBoxSurname;
+        private System.Windows.Forms.TextBox textBoxName;
+        private System.Windows.Forms.Button buttonSearchCustomer;
     }
 }
 
