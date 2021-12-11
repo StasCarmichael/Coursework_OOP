@@ -7,7 +7,7 @@
     <ProjectGuid>{AC4736C9-FC78-4A8E-A0F5-963C88492E21}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Project</RootNamespace>
-    <AssemblyName>Project</AssemblyName>
+    <AssemblyName>Railway ticket office</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
